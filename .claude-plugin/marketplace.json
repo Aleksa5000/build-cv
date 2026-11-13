@@ -1,0 +1,15 @@
+{
+  "name": "build-cv",
+  "description": "Build a developer CV from your real projects, as a Claude Code skill.",
+  "owner": {
+    "name": "Aleksa Djorovic",
+    "url": "https://github.com/Aleksa5000"
+  },
+  "plugins": [
+    {
+      "name": "build-cv",
+      "source": "./",
+      "description": "Turns your projects into honest, recruiter-ready CV entries and exports PDF, DOCX, Markdown and HTML. Keeps the CV updated as you build."
+    }
+  ]
+}

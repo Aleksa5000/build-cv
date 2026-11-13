@@ -1,0 +1,47 @@
+name: Feedback
+description: "Tell us how building your CV went: what helped and what didn't."
+title: "[Feedback] "
+labels: ["feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve build-cv! Please **don't paste your CV or personal data**, a short description is enough.
+  - type: dropdown
+    id: rating
+    attributes:
+      label: Overall, how useful was build-cv?
+      options:
+        - "5 - Very useful"
+        - "4 - Useful"
+        - "3 - OK"
+        - "2 - Not very useful"
+        - "1 - Not useful"
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Skill version
+      placeholder: "0.1.0"
+  - type: input
+    id: session
+    attributes:
+      label: Session
+      description: Mode, CV language, output formats, number of projects. No personal data.
+      placeholder: "New CV · English · PDF+DOCX · 3 projects"
+  - type: textarea
+    id: helpful
+    attributes:
+      label: What was most helpful?
+  - type: textarea
+    id: improve
+    attributes:
+      label: What should be better?
+      description: Invented or wrong facts, weak wording, layout problems, export problems, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: ideas
+    attributes:
+      label: Anything you wish it did?

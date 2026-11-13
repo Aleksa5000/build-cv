@@ -1,0 +1,2 @@
+{ "version": 1, "languages": ["en"], "formats": ["pdf", "docx", "md"],
+  "design": { "preset": "classic" }, "target": { "role": "Junior Full-stack Developer", "country": "EU remote" }, "projects": [] }

@@ -1,0 +1,18 @@
+{
+  "description": "build-cv: at the start of a session in a project that is part of your CV, offer once to add new work to the CV. Never writes anything.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/skills/build-cv/scripts/track.mjs", "hook"],
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

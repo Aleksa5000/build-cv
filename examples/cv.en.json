@@ -1,0 +1,42 @@
+{
+  "basics": {
+    "name": "Alex Example", "label": "Junior Full-stack Developer",
+    "email": "alex@example.com", "location": { "city": "Berlin", "countryCode": "DE" },
+    "profiles": [ { "network": "GitHub", "url": "https://github.com/alex-example" }, { "network": "LinkedIn", "url": "https://linkedin.com/in/alex-example" } ],
+    "summary": "Career changer from logistics who builds full-stack web apps with Python, TypeScript and React. Shipped two projects used by real people, with tests and deployment. Looking for a junior full-stack role (EU remote)."
+  },
+  "skills": [
+    { "name": "Programming languages", "keywords": ["Python", "TypeScript", "SQL"] },
+    { "name": "Frameworks", "keywords": ["FastAPI", "React", "Next.js", "Tailwind CSS"] },
+    { "name": "Data", "keywords": ["PostgreSQL", "Redis", "Prisma"] },
+    { "name": "Tools", "keywords": ["Docker", "GitHub Actions", "pytest", "Vitest"] },
+    { "name": "AI-assisted development", "keywords": ["Claude Code (spec → review → test)"] }
+  ],
+  "projects": [
+    {
+      "name": "StudyCards", "description": "Flashcard app with spaced repetition for language learners", "roles": ["Solo developer"],
+      "url": "https://github.com/alex-example/studycards", "startDate": "2026-05", "endDate": "",
+      "highlights": [
+        "Built a spaced-repetition scheduler that picks review intervals from answer streaks (1–60 days).",
+        "Designed a FastAPI + PostgreSQL backend with JWT auth and 40+ pytest tests in CI.",
+        "Used by 25 classmates during one semester; fixed 12 issues they reported."
+      ],
+      "keywords": ["Python", "FastAPI", "PostgreSQL", "React", "Docker"]
+    },
+    {
+      "name": "ShiftBoard", "description": "Shift planning tool for a local warehouse team", "roles": ["Solo developer, for my former employer"],
+      "startDate": "2026-01", "endDate": "2026-04",
+      "highlights": [
+        "Replaced a shared spreadsheet with a Next.js app for 18 workers, with roles and shift swaps.",
+        "Cut weekly planning time from about 3 hours to 30 minutes (measured by the team lead)."
+      ],
+      "keywords": ["TypeScript", "Next.js", "Prisma", "PostgreSQL", "Vercel"]
+    }
+  ],
+  "work": [
+    { "name": "Nordlog GmbH", "position": "Warehouse Team Lead", "startDate": "2021-03", "endDate": "2025-12",
+      "highlights": ["Led a team of 12 and introduced barcode-based stock checks."] }
+  ],
+  "education": [ { "institution": "Online", "area": "Full-stack web development", "studyType": "Course", "startDate": "2025-09", "endDate": "2026-02" } ],
+  "languages": [ { "language": "German", "fluency": "Native" }, { "language": "English", "fluency": "C1" } ]
+}

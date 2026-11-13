@@ -1,0 +1,14 @@
+{
+  "name": "build-cv",
+  "displayName": "Build CV",
+  "version": "0.1.0",
+  "description": "Build and keep updating a professional developer CV from your real projects. Honest bullets, PDF/DOCX/Markdown/HTML export, job-ad tailoring, and a hook that offers to add new work.",
+  "author": {
+    "name": "Aleksa Djorovic",
+    "url": "https://github.com/Aleksa5000"
+  },
+  "homepage": "https://github.com/Aleksa5000/build-cv",
+  "repository": "https://github.com/Aleksa5000/build-cv",
+  "license": "MIT",
+  "keywords": ["cv", "resume", "career", "job-search", "portfolio", "vibe-coding", "linkedin"]
+}
