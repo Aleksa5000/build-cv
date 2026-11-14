@@ -53,7 +53,7 @@ If the user says "doesn't matter", pick Classic and say they can change it any t
 
 ## Import an existing CV
 
-- **PDF:** read it with the Read tool.
+- **PDF:** read it with the agent's file reading (Claude Code's Read tool reads PDFs). If your agent can't read PDFs, ask the user to paste the text.
 - **DOCX:** `node "<skill dir>/scripts/read-docx.mjs" "<file.docx>"` prints its text. If that fails, ask the user to save it as PDF or paste the text.
 - **Pasted text, Markdown, LinkedIn PDF export:** read directly.
 Then map everything into `cv.<lang>.json`, show a short summary of what you found, and ask which parts to keep, improve or drop. **Never silently rewrite their existing wording.** Propose improvements as before/after and apply only what they approve.

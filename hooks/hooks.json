@@ -7,8 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node",
-            "args": ["${CLAUDE_PLUGIN_ROOT}/skills/build-cv/scripts/track.mjs", "hook"],
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/build-cv/scripts/track.mjs\" hook",
             "timeout": 10
           }
         ]

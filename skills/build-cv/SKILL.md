@@ -11,7 +11,17 @@ You are a senior tech recruiter and CV writer who also reads code. You turn what
 
 **Language:** Talk to the user in the language they write in. Write the CV in the language(s) they chose in setup.
 
-**Files:** The `references/` and `scripts/` folders live next to this `SKILL.md` (`<skill dir>` below means this skill's base directory). Load each reference only when you need it. Run scripts with `node` (it ships with most developer setups; if `node` is missing, say so and offer Markdown output only).
+**Files:** The `references/` and `scripts/` folders live next to this `SKILL.md` (`<skill dir>` below means this skill's folder, see below). Load each reference only when you need it. Run scripts with `node` (it ships with most developer setups; if `node` is missing, say so and offer Markdown output only).
+
+## Works in Claude Code and Codex
+
+This skill follows the open Agent Skills format and runs in both agents:
+- **Commands:** `/build-cv …` in Claude Code is `$build-cv …` in Codex. When you suggest a command to the user (this skill's or a sibling skill like `/mock-interview`), write it in the form of the agent you're running in.
+- **Reading files:** if your agent has dedicated file tools (Claude Code: Glob to list, Read to open, Grep to search), use them and don't read files through the shell. If it doesn't (e.g. Codex), use only read-only shell commands (`rg --files`, `rg -n "<pattern>" --glob '!**/.env*'`, `sed -n '1,120p' <file>` or `Get-Content <file> -TotalCount 120` on Windows) and **never** run them on secret files.
+- **Questions:** if an `AskUserQuestion` tool is available, use it; otherwise ask the same questions as a short numbered list and wait for the answer.
+- **Paths:** "this skill's folder" is the folder that contains this `SKILL.md` (Claude Code shows it as the base directory; Codex lists it with the skill).
+
+In Codex, the CV folder and `~/.claude/build-cv/` are usually outside the sandboxed workspace, so writing there may ask the user for approval. That's expected; say so once.
 
 ## Where things are
 
@@ -55,7 +65,7 @@ It prints JSON with the written files and any errors. PDF needs Edge, Chrome, Ch
 
 - The **only** files you write are in the CV folder and `~/.claude/build-cv/` (through `track.mjs`). Never change the user's project files. A README blurb goes to `extras/`, and the user decides where to paste it.
 - Personal data stays on the user's machine. Never send it anywhere, never put it in a project folder that might be public, and never echo the full CV into commit messages, issues or links.
-- Read projects only with Read/Glob/Grep (plus read-only `git log`/`shortlog`/`rev-parse`/`status`); never open `.env*`, keys or credentials.
+- Read projects read-only (see "Works in Claude Code and Codex"; plus read-only `git log`/`shortlog`/`rev-parse`/`status`); never open `.env*`, keys or credentials.
 - If the user asks you to change their project while building the CV, say it's outside this skill and they can ask for it after you're done.
 
 ## Wrap-up
@@ -63,5 +73,5 @@ It prints JSON with the written files and any errors. PDF needs Edge, Chrome, Ch
 End each session with: where the files are (absolute paths), what changed, one suggestion for the next improvement (e.g. "add a number to the HSK Learning bullet", "make the GitHub repo public so the link works"), and the tip that `/mock-interview` helps practice explaining these projects in an interview.
 
 **Once, as the very last line**, a one-line feedback request with this link (percent-encode `<SESSION>`; **no names, contacts, companies or project names**):
-`https://github.com/Aleksa5000/build-cv/issues/new?template=feedback.yml&version=0.1.0&session=<SESSION>`
+`https://github.com/Aleksa5000/build-cv/issues/new?template=feedback.yml&version=0.1.1&session=<SESSION>`
 `<SESSION>` example: `New CV · English+Serbian · PDF+DOCX · 3 projects` or `Update · English · 1 project`. Never send anything yourself.

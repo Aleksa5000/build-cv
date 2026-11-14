@@ -4,7 +4,7 @@ Goal: in about 15 file reads, find what a hiring manager wants to know about thi
 
 ## Ground rules
 
-- Use **Read, Glob and Grep** only. No shell commands to look at files (`cat`, `ls`, `find`, `grep`). The only shell commands for analysis are `git log`, `git shortlog` and `git rev-parse`.
+- Read with the agent's file tools (Claude Code: Read, Glob, Grep), not with shell commands like `cat`, `ls`, `find`, `grep`. In an agent without file tools (Codex), use only read-only shell commands (`rg --files`, `rg -n ... --glob '!**/.env*'`, `sed -n`/`Get-Content`), never on secret files. Beyond reading files, the only shell commands for analysis are `git log`, `git shortlog` and `git rev-parse`.
 - **Never open secrets:** `.env*` (except `.env.example`), keys, credentials, database files. Always exclude them in Grep (`glob: "!**/.env*"`).
 - Skip noise: `node_modules/`, `.venv/`, `dist/`, `build/`, `.next/`, `__pycache__/`, `vendor/`, lock files, binaries, datasets.
 

@@ -14,7 +14,7 @@ Commands (run from the project folder, or pass its path):
 2. Ask for the idea in 2–3 sentences if the folder is still empty: what it is, for whom, planned stack.
 3. Propose an **in-progress** entry (empty `endDate`, present tense, e.g. "Building a … with …"). Keep it modest; promise nothing that isn't built yet. If there's nothing built yet, it's fine to save it to `build-cv.json` only, and add it to the CV after the first real feature.
 4. After a yes: save, run `track.mjs mark`, and add the project to `build-cv.json` → `projects` with `status: "active"`.
-5. Tell the user: "From now on, when you open Claude Code in this project and there's new work, I'll ask once whether to add it to your CV. You can also run `/build-cv update` any time." Mention that the reminder needs the plugin install (the manual copy has no hook).
+5. Tell the user: "From now on, when you open Claude Code in this project and there's new work, I'll ask once whether to add it to your CV. You can also run `/build-cv update` any time." Mention that the reminder needs the Claude Code plugin install (a manual copy, and Codex, have no reminder hook: there, run `$build-cv update` after bigger features).
 
 ## `/build-cv update` (or after the hook's reminder, if the user says yes)
 

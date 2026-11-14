@@ -53,6 +53,13 @@ Copy-Item -Recurse build-cv\skills\build-cv $HOME\.claude\skills\
 
 Requires **Node.js** (for exports and tracking) and, for PDF, **Edge, Chrome, Chromium or Brave**. Restart Claude Code after installing.
 
+**Option C: Codex** (it reads the same `SKILL.md` format)
+```
+codex plugin marketplace add Aleksa5000/build-cv
+codex plugin add build-cv@build-cv
+```
+Or copy the folder: `cp -r build-cv/skills/build-cv ~/.agents/skills/`. In Codex, run it with `$build-cv` instead of `/build-cv`. The "add to CV?" reminder is a plugin hook: Claude Code runs it automatically; Codex runs plugin hooks only after you approve them in Codex. Without it, run `$build-cv update` after bigger features.
+
 ## 🚀 Usage
 
 Open Claude Code in a project (or in the folder with all your projects) and run:
