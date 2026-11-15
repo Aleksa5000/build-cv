@@ -7,7 +7,8 @@ Run this when there is no CV folder yet (`track.mjs status` shows `cvFolder: nul
 1. **Where to save the CV?** Suggest `~/Documents/CV` (show the real absolute path for their OS). Warn in one line: not inside a project that may go to a public repo, because the CV contains personal data.
 2. **Do you already have a CV?**
    - No → start fresh.
-   - Yes → ask for the file path or to paste the text. Accept PDF, DOCX, Markdown, plain text or a LinkedIn "Save to PDF" export (see "Import an existing CV" below).
+   - Yes → ask for the file path or to paste the text. Accept PDF, DOCX, Markdown, plain text or a LinkedIn "Save to PDF" export (see "Import an existing CV" below). Say once: "I'll keep everything that's in it as it is and continue in the same format; I only add."
+   - With an existing CV, skip the design round and the personal-information form: take both from the CV, and ask only what's missing.
 3. **CV language(s):** English · <the user's language> · both. Recommend English for remote or international jobs.
 4. **Output formats** (multi-select): PDF (recommended, what you send) · Word .docx (some companies and agencies ask for it) · Markdown · HTML page.
 
@@ -56,4 +57,4 @@ If the user says "doesn't matter", pick Classic and say they can change it any t
 - **PDF:** read it with the agent's file reading (Claude Code's Read tool reads PDFs). If your agent can't read PDFs, ask the user to paste the text.
 - **DOCX:** `node "<skill dir>/scripts/read-docx.mjs" "<file.docx>"` prints its text. If that fails, ask the user to save it as PDF or paste the text.
 - **Pasted text, Markdown, LinkedIn PDF export:** read directly.
-Then map everything into `cv.<lang>.json`, show a short summary of what you found, and ask which parts to keep, improve or drop. **Never silently rewrite their existing wording.** Propose improvements as before/after and apply only what they approve.
+Then follow `existing-cv.md`: keep the original untouched, continue in its format, lock what was there, and only add. Don't ask which parts to "keep or drop": everything they had stays.

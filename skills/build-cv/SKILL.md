@@ -49,9 +49,13 @@ Follow `references/writing-guide.md` for every line. The most important rules:
 - Bullets start with a strong verb, say what was built, with what, and why it matters.
 - One page for juniors. Projects before experience when experience is thin.
 
+## An existing CV is the user's: never change what you didn't add
+
+If the user gives you an existing CV (any format), follow `references/existing-cv.md`. In short: keep the original file untouched; learn its format (sections, wording, voice, dates, look) and **continue in that format**; extract what they've done from it; **add** new content only; change or remove **only items build-cv added itself**. Improvements to their own lines are suggestions in chat, applied only when they explicitly ask for that exact change. For a DOCX, edit a copy in place with `scripts/docx-edit.mjs` (it inserts in their formatting; changing an existing line needs the user's explicit approval in the plan); for a PDF or pasted text, rebuild it word for word and lock it with `scripts/guard.mjs`, which must pass before every save. Never edit `source/` or the scripts by hand, and never put code into settings.
+
 ## Changing the CV: always with permission
 
-Follow "Safe updates" in `references/cv-data.md`: show the proposed change (before/after), wait for an explicit yes, back up the old JSON to `history/`, write, then render. Applies to new CVs, imported CVs, updates and design changes. When importing a CV, keep the user's wording unless they approve a rewrite.
+Follow "Safe updates" in `references/cv-data.md`: show the proposed change (before/after), wait for an explicit yes, back up the old JSON to `history/`, write, then render. Applies to new CVs, imported CVs, updates and design changes. For a CV built from an existing one, also run `guard.mjs check` before saving (see `references/existing-cv.md`).
 
 ## Rendering
 
@@ -73,5 +77,5 @@ It prints JSON with the written files and any errors. PDF needs Edge, Chrome, Ch
 End each session with: where the files are (absolute paths), what changed, one suggestion for the next improvement (e.g. "add a number to the HSK Learning bullet", "make the GitHub repo public so the link works"), and the tip that `/mock-interview` helps practice explaining these projects in an interview.
 
 **Once, as the very last line**, a one-line feedback request with this link (percent-encode `<SESSION>`; **no names, contacts, companies or project names**):
-`https://github.com/Aleksa5000/build-cv/issues/new?template=feedback.yml&version=0.1.1&session=<SESSION>`
+`https://github.com/Aleksa5000/build-cv/issues/new?template=feedback.yml&version=0.2.0&session=<SESSION>`
 `<SESSION>` example: `New CV · English+Serbian · PDF+DOCX · 3 projects` or `Update · English · 1 project`. Never send anything yourself.

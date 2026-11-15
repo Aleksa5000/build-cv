@@ -23,7 +23,12 @@ Made for vibe coders, self-taught developers and career changers.
 
 - 🔍 **Reads your projects** (one folder, or a folder full of projects where you pick which ones) and writes CV entries: a one-line pitch, dates, your role, 2–4 achievement bullets and a tech line. Every claim points to something in the code.
 - 🙅 **Never invents anything.** No fake metrics, users or skills. If a bullet needs a number, it asks you. If you ask it to make numbers up, it refuses and suggests how to measure real ones.
-- 📄 **Imports your existing CV** (PDF, Word, Markdown, pasted text or a LinkedIn "Save to PDF" export) and improves it only with your permission, showing every change as before/after.
+- 📄 **Respects your existing CV.** Give it your CV (Word, PDF, Markdown, pasted text or a LinkedIn "Save to PDF" export) and it:
+  - **keeps your original file untouched** and learns its format: section names, your voice and tense, date format, bullet style and look
+  - **continues in that same format**: new projects look like you wrote them
+  - **never changes or deletes anything it didn't add.** Your lines are locked; ideas for improving them are only suggestions until you approve an exact change
+  - for **Word**, it edits a copy *in place*, inserting new lines with your own formatting (fonts, bold, bullets, table rows); a built-in check proves nothing else changed
+  - for **PDF**, it rebuilds your CV word for word, locks it, and checks before every save that every original line is still there
 - 🧑‍💼 **Asks for what every CV needs:** name, title, contact, links, languages, education, experience, an optional photo (and tells you where photos are expected and where they're not).
 - 🎨 **Your design, not a default one.** Pick Classic, Modern, Minimal or Compact, or your own font, accent color, lines and page size (A4 or Letter).
 - 📦 **Exports PDF, Word (.docx), Markdown and HTML**, with no extra software: PDF through the Edge/Chrome you already have, DOCX generated directly. One column and real text, so ATS (applicant tracking systems) can read it.

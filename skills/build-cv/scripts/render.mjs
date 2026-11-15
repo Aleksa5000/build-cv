@@ -37,6 +37,13 @@ const PRESETS = {
 };
 const userDesign = settings.design || {};
 const design = { ...(PRESETS[userDesign.preset] || PRESETS.classic), ...userDesign };
+// Settings are data, never code: a font is a list of names, a colour is a hex or a colour word.
+{
+  const base = PRESETS[userDesign.preset] || PRESETS.classic;
+  if (typeof design.font !== "string" || /[;{}<>:()\\]/.test(design.font)) design.font = base.font;
+  if (typeof design.accent !== "string" || !/^(#[0-9a-fA-F]{3,8}|[a-zA-Z]{3,20})$/.test(design.accent)) design.accent = base.accent;
+  design.base = Number(design.base) > 6 && Number(design.base) < 16 ? Number(design.base) : base.base;
+}
 const DEFAULT_ORDER = ["summary", "skills", "projects", "work", "education", "certificates", "languages", "volunteer", "awards", "interests"];
 const order = design.order || DEFAULT_ORDER;
 
@@ -52,7 +59,16 @@ function fmtDate(d, lang) {
   if (!d) return "";
   const [y, m] = String(d).split("-");
   if (!m) return y;
+  // design.dateFormat copies an existing CV's style: "MM/YYYY", "MM.YYYY", "YYYY", "MMMM YYYY", default "MMM YYYY".
+  const f = design.dateFormat;
+  if (f === "MM/YYYY") return `${m}/${y}`;
+  if (f === "MM.YYYY") return `${m}.${y}`;
+  if (f === "YYYY") return y;
   try {
+    if (f === "MMMM YYYY") {
+      const loc = design.dateLocale || { sr: "sr-Latn", bs: "bs-Latn" }[lang] || lang;
+      return new Intl.DateTimeFormat(loc, { month: "long", year: "numeric" }).format(new Date(Number(y), Number(m) - 1, 1)).replace(/\.$/, "");
+    }
     // "sr" defaults to Cyrillic in ICU; CVs are usually Latin. Override with design.dateLocale (e.g. "sr-Cyrl").
     const locale = design.dateLocale || { sr: "sr-Latn", bs: "bs-Latn" }[lang] || lang;
     const s = new Intl.DateTimeFormat(locale, { month: "short", year: "numeric" }).format(new Date(Number(y), Number(m) - 1, 1));
@@ -80,7 +96,7 @@ function sections(cv, lang) {
   for (const key of order) {
     let items = [];
     if (key === "summary" && cv.basics?.summary) items = [{ text: cv.basics.summary }];
-    else if (key === "skills" && has(cv.skills)) items = cv.skills.map((s) => ({ inline: `${s.name}: `, text: (s.keywords || []).join(", ") }));
+    else if (key === "skills" && has(cv.skills)) items = cv.skills.map((s) => (s.name ? { inline: `${s.name}: `, text: (s.keywords || []).join(", ") } : { text: (s.keywords || []).join(", ") }));   // unnamed groups stay unnamed (an existing CV)
     else if (key === "projects" && has(cv.projects)) items = cv.projects.map((p) => ({
       title: p.name, sub: [p.description, (p.roles || []).join(", ")].filter(Boolean).join(" · "), date: range(p.startDate, p.endDate, lang, L),
       link: p.url, lines: p.highlights || [], tech: has(p.keywords) ? `${L.tech}: ${p.keywords.join(", ")}` : "",

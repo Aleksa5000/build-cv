@@ -9,6 +9,10 @@ Goal: a CV that sounds like a strong professional wrote it, and every line of it
 - "Built" means the user built it. If the git history shows other authors, ask what *they* did, and describe only their part ("Built the payment flow in a team of 3").
 - AI-assisted work is real work. Don't hide it and don't apologize for it. If the user wants, mention it as a skill: "AI-assisted development (Claude Code): spec → review → test". Never claim deep knowledge of code the user can't explain; suggest `/explain-stack` and `/mock-interview` to close that gap.
 
+## Continuing an existing CV
+
+When the user has their own CV, its style wins over this guide: same voice (first person or not), tense, verb gender, date format, punctuation, section names and entry layout. Use this guide only for *what* to write, not *how* it should look (see `existing-cv.md`).
+
 ## Project entry format
 
 ```
