@@ -7,6 +7,7 @@ Commands (run from the project folder, or pass its path):
 - `node "<skill dir>/scripts/track.mjs" changes [path]`: what changed since the last sync (commit list or changed files)
 - `node "<skill dir>/scripts/track.mjs" unmark [path]`: stop tracking
 - `node "<skill dir>/scripts/track.mjs" status`: the CV folder and all tracked projects
+- `node "<skill dir>/scripts/track.mjs" pause|resume [path]`: stop or resume the per-session notes, keeping the project tracked
 
 ## `/build-cv track` (a new idea or a project just started)
 

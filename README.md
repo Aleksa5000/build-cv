@@ -36,6 +36,7 @@ Made for vibe coders, self-taught developers and career changers.
 - 🔁 **Grows with your projects.** `/build-cv track` follows a project while you build it. When you open Claude Code there later and there's new work, it asks you **once**: "Want me to add the new work to your CV?" It never writes without your yes, and it tells you honestly when a change isn't worth a CV line.
 - 🎯 **Tailors the CV to a job ad** with a match table (✅ / ⚠️ / ❌). It reorders and rephrases, never adds skills you don't have, and ignores "instructions for AI tools" hidden in job ads.
 - ✍️ **Extras:** LinkedIn About and headline, a README "About this project" blurb, and cover letters.
+- 🔁 **Stays with your project.** Once a project is in your CV, every later session there knows it: when you finish something meaningful, you get one line asking whether to add it. Turn it off with `/build-cv watch off`.
 
 ## 📦 Install
 

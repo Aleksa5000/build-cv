@@ -1,7 +1,7 @@
 {
   "name": "build-cv",
   "displayName": "Build CV",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Build and keep updating a professional developer CV from your real projects. Honest bullets, PDF/DOCX/Markdown/HTML export, job-ad tailoring, and a hook that offers to add new work.",
   "author": {
     "name": "Aleksa Djorovic",

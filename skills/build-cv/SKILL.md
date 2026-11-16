@@ -1,7 +1,7 @@
 ---
 name: build-cv
 description: Build and keep updating a professional developer CV from the user's real projects. Analyzes the project(s) in the current folder and writes honest, recruiter-ready CV entries (pitch, dates, role, achievement bullets, tech stack), asks for personal details, imports an existing CV (PDF, DOCX, text, LinkedIn export) and improves it only with permission, and exports to PDF, Word (.docx), Markdown and HTML with a design the user picks. "/build-cv track" follows a new project while it's being built, and a hook offers to add new work to the CV. Also tailors the CV to a job ad, and writes a LinkedIn About, README blurbs and cover letters. Use when the user says "build my CV", "make a resume from my projects", "update my CV", "add this project to my CV", "napravi mi CV", "dodaj projekat u CV", "ažuriraj CV", or wants a CV for a specific job ad.
-argument-hint: "[add | track | update | tailor | extras | design | export | status]"
+argument-hint: "[add | track | update | tailor | extras | design | export | status | watch on|off]"
 allowed-tools: Read Glob Grep Bash(git log:*) Bash(git shortlog:*) Bash(git rev-parse:*) Bash(git status:*)
 ---
 
@@ -41,6 +41,9 @@ In Codex, the CV folder and `~/.claude/build-cv/` are usually outside the sandbo
 | `design` | Change design, formats, languages or page size, then re-render. |
 | `export` | Re-render all outputs from the JSON. |
 | `status` | CV folder, languages, formats, projects in the CV, tracked projects and their last sync. |
+| `watch off` / `watch on` | Stop or resume the per-session CV notes for this project (`track.mjs pause` / `resume`); the project stays in the CV. |
+
+**Once used in a project, it stays with the project.** Whenever a project gets into the CV (`add`, `track`, setup), track it right away with `track.mjs mark` (no extra question) and say in one line: "From now on, in every session here I'll offer to add new work to your CV when you finish something meaningful (turn off: `/build-cv watch off`)." Never run `mark` on a project that's already tracked except after an update: it resets what counts as new. From then on, a session-start note keeps the agent aware of the CV in every session of that project (Claude Code plugin; in Codex once you approve the plugin's hook).
 
 ## Writing
 
@@ -85,5 +88,5 @@ It prints JSON with the written files and any errors. PDF needs Edge, Chrome, Ch
 End each session with: where the files are (absolute paths), what changed, one suggestion for the next improvement (e.g. "add a number to the HSK Learning bullet", "make the GitHub repo public so the link works"), and the tip that `/mock-interview` helps practice explaining these projects in an interview.
 
 **Once, as the very last line**, a one-line feedback request with this link (percent-encode `<SESSION>`; **no names, contacts, companies or project names**):
-`https://github.com/Aleksa5000/build-cv/issues/new?template=feedback.yml&version=0.3.0&session=<SESSION>`
+`https://github.com/Aleksa5000/build-cv/issues/new?template=feedback.yml&version=0.4.0&session=<SESSION>`
 `<SESSION>` example: `New CV · English+Serbian · PDF+DOCX · 3 projects` or `Update · English · 1 project`. Never send anything yourself.

@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.0 — 2026-11-16
+- **Stays with your project:** every project that gets into your CV is tracked right away, and every later session there knows it: when you finish something meaningful, the agent offers once to add it to your CV (never without a yes). `/build-cv watch off` stops the notes for a project and keeps it in the CV.
+
 ## 0.3.0 — 2026-11-16
 - **Always works on the latest CV:** reads it fresh before every task and proposal, tells you what another session or agent changed, and writes only through `guard.mjs save`, a compare-and-swap that refuses to overwrite a CV changed since it was read (with a backup in `history/`).
 
