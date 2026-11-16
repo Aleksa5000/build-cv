@@ -65,6 +65,24 @@ codex plugin add build-cv@build-cv
 ```
 Or copy the folder: `cp -r build-cv/skills/build-cv ~/.agents/skills/`. In Codex, run it with `$build-cv` instead of `/build-cv`. The "add to CV?" reminder is a plugin hook: Claude Code runs it automatically; Codex runs plugin hooks only after you approve them in Codex. Without it, run `$build-cv update` after bigger features.
 
+## 🔄 Stay up to date
+
+New versions come out often. Turn on automatic updates once, and you'll always have the latest:
+
+**Claude Code** (third-party plugins don't auto-update by default):
+- In Claude Code: `/plugin` → **Marketplaces** → **build-cv** → **Enable auto-update**
+- Or add `"autoUpdate": true` to the marketplace in `~/.claude/settings.json`:
+  ```json
+  "extraKnownMarketplaces": {
+    "build-cv": { "source": { "source": "github", "repo": "Aleksa5000/build-cv" }, "autoUpdate": true }
+  }
+  ```
+Claude Code then checks for updates in the background and installs them; run `/reload-plugins` or restart to use the new version. To update right away: `claude plugin marketplace update build-cv` and `claude plugin update build-cv@build-cv`.
+
+**Codex** (no automatic plugin updates yet): `codex plugin marketplace upgrade build-cv`
+
+**Manual copy:** `git pull` in your clone and copy `skills/build-cv` again.
+
 ## 🚀 Usage
 
 Open Claude Code in a project (or in the folder with all your projects) and run:
