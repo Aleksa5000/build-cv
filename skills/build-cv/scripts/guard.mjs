@@ -13,8 +13,19 @@
 //                                               ONLY when the user explicitly asked to change that one locked item
 //                                               themselves: takes the current value at the pointer (e.g.
 //                                               /work/0/position) into the snapshot.
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+//   node guard.mjs hash <cv folder>             fingerprints of build-cv.json and every cv.<lang>.json, as JSON.
+//                                               Take them when you read the CV, before proposing anything.
+//   node guard.mjs save <cv folder> <target> <proposed file> <expected hash>
+//                                               compare-and-swap write of <target> (e.g. cv.en.json): writes
+//                                               only if the file still has <expected hash>, i.e. no other session
+//                                               or agent changed it since you read it. Backs it up to history/
+//                                               first and, for a locked CV, runs the guard check. Exit 2 = it
+//                                               changed meanwhile: re-read it and re-apply your change on top.
+import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { basename, join } from "node:path";
+
+const fingerprint = (f) => (existsSync(f) ? createHash("sha256").update(readFileSync(f)).digest("hex").slice(0, 16) : "missing");
 
 const ID_KEYS = ["name", "title", "institution", "position", "organization", "language", "network", "url", "issuer"];
 const read = (f) => JSON.parse(readFileSync(f, "utf8"));
@@ -66,7 +77,34 @@ function compare(locked, cur, path, out) {
 const [cmd, a, b, c] = process.argv.slice(2);
 const langs = (dir) => readdirSync(dir).filter((f) => /^cv\.[a-z]{2,3}(-[A-Za-z]{2,4})?\.json$/.test(f)).map((f) => f.split(".")[1]);
 
-if (cmd === "lock") {
+if (cmd === "hash") {
+  const files = ["build-cv.json", ...langs(a).map((l) => `cv.${l}.json`)];
+  console.log(JSON.stringify(Object.fromEntries(files.map((f) => [f, fingerprint(join(a, f))])), null, 2));
+} else if (cmd === "save") {
+  const [target, proposed, expected] = [b, c, process.argv[6]];
+  if (!target || !proposed || !expected) { console.error("usage: save <cv folder> <target> <proposed file> <expected hash>"); process.exit(1); }
+  if (target !== basename(target) || !/^(build-cv|cv\.[a-z]{2,3}(-[A-Za-z]{2,4})?)\.json$/.test(target)) { console.error("target must be build-cv.json or cv.<lang>.json in the CV folder"); process.exit(1); }
+  const file = join(a, target);
+  const now = fingerprint(file);
+  if (now !== expected) {
+    console.log(JSON.stringify({ ok: false, reason: `${target} was changed by someone else since you read it (expected ${expected}, now ${now}). Nothing was written. Re-read it, re-apply your change on top of the new version, show the user, and save with the new hash.` }));
+    process.exit(2);
+  }
+  const data = JSON.parse(readFileSync(proposed, "utf8"));   // must be valid JSON
+  const m = target.match(/^cv\.(.+)\.json$/);
+  if (m && existsSync(join(a, "source", `locked.${m[1]}.json`))) {
+    const out = [];
+    compare(read(join(a, "source", `locked.${m[1]}.json`)), data, "", out);
+    if (out.length) { console.log(JSON.stringify({ ok: false, reason: "locked content would change", violations: out }, null, 2)); process.exit(1); }
+  }
+  if (existsSync(file)) {
+    mkdirSync(join(a, "history"), { recursive: true });
+    const stamp = new Date().toISOString().replace(/[-:]/g, "").replace("T", "-").slice(0, 15);
+    copyFileSync(file, join(a, "history", target.replace(/\.json$/, `-${stamp}.json`)));
+  }
+  writeFileSync(file, JSON.stringify(data, null, 2) + "\n");
+  console.log(JSON.stringify({ ok: true, saved: target, hash: fingerprint(file) }));
+} else if (cmd === "lock") {
   mkdirSync(join(a, "source"), { recursive: true });
   const done = [];
   for (const l of langs(a)) {

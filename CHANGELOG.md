@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.0 — 2026-11-16
+- **Always works on the latest CV:** reads it fresh before every task and proposal, tells you what another session or agent changed, and writes only through `guard.mjs save`, a compare-and-swap that refuses to overwrite a CV changed since it was read (with a backup in `history/`).
+
 ## 0.2.0 — 2026-11-15
 - **Existing CVs are respected:** build-cv keeps the original file untouched, learns its format (sections, voice, tense, date format, bullets, look) and continues in it. It only adds; anything it didn't add is locked.
 - `docx-edit.mjs`: edits a copy of a Word CV in place: inserts new paragraphs and table rows with the CV's own formatting, keeps every other part byte for byte, and proves that no original paragraph changed. Changing or removing an existing line requires the user's explicit approval, quoted in the plan.

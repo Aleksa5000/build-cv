@@ -77,9 +77,9 @@ Rules:
 
 ## Safe updates (always)
 
-1. Read the current `cv.<lang>.json`.
+1. Read the current `cv.<lang>.json` fresh and take its fingerprint (`guard.mjs hash`).
 2. If the CV came from an existing one, run `guard.mjs check` on the proposed JSON; violations mean the proposal touches the user's own content and must be fixed first.
 3. **Show the proposed change** as a short before/after per changed section ("Projects › hsk-learning: + 1 bullet, Tech: + Celery"). For a new CV, show the full draft.
 4. **Ask for permission.** Only a clear yes applies the change. The user can also say "only the first one" or rephrase a bullet.
-5. Copy the current file to `history/cv.<lang>-<YYYY-MM-DD-HHMM>.json`, then write the new version.
+5. Write the proposal to a temp file and save it with `guard.mjs save <CV folder> cv.<lang>.json <temp file> <hash>`: it refuses if the file changed since step 1 (re-read and re-apply), backs up the old version to `history/` and writes. The same for `build-cv.json`.
 6. Regenerate the chosen formats (`export.md`) and update `projects[].lastSync` in `build-cv.json`.
